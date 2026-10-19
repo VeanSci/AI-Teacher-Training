@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>바이브코딩 교원 연수</title>
+<meta name="description" content="중학교 선생님을 위한 셀프 바이브코딩 연수 시리즈. AI 기본 이론부터 수업 PPT, 학생 참여형 웹앱, 이미지·영상 생성, 평가 설계, 결과 데이터화까지.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#f7f8f4;--sheet:#ffffff;--ink:#1d2a3a;--muted:#5d6878;--line:#d9ded6;--grid:rgba(29,42,58,.045);--accent:#2f5bd3;--hl:#fff07a;
+--f-display:"Gowun Batang","Noto Serif KR",serif;--f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#12171f;--sheet:#19202b;--ink:#e6eaf0;--muted:#9aa5b5;--line:#2c3644;--grid:rgba(230,234,240,.035);--accent:#7d9cf5;--hl:#6b5f12;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:56px 56px;display:grid;gap:28px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+h1{font-family:var(--f-display);font-size:clamp(32px,6vw,52px);line-height:1.25;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-size:22px;margin:0}
+.mark{background:linear-gradient(transparent 55%,var(--hl) 55%);padding:0 2px}
+.lead{color:var(--muted);font-size:17px;max-width:62ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ix-card{display:grid;gap:4px;align-content:start;text-decoration:none;color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:18px;transition:border-color .15s}
+.ix-card:hover,.ix-card:focus-visible{border-color:var(--accent);outline:none}
+.ix-ep{font-family:var(--f-mono);font-size:12px;color:var(--accent)}
+.ix-card b{font-family:var(--f-display);font-size:20px}
+.ix-d{font-size:14px;color:var(--muted)}
+.ix-card.sp{border-style:dashed}
+.path{font-size:15px;color:var(--muted);margin:0}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <span class="eyebrow">중학교 교원 자율연수 · 셀프 실습 자료</span>
+    <h1>코드 한 줄 몰라도, <span class="mark">말로 만드는 수업</span></h1>
+    <p class="lead">AI가 답하는 원리부터 수업 PPT, 학생 참여형 웹앱, 이미지·영상 생성, 평가 설계, 결과 데이터화까지. 각 편을 차례로 따라가면 내 수업에 바로 쓸 자료가 하나씩 완성됩니다.</p>
+  </header>
+  <section style="display:grid;gap:12px">
+    <h2>정규편</h2>
+    <p class="path">1편부터 순서대로 들으면 가장 좋습니다. 1편은 모든 편의 바탕입니다.</p>
+    <div class="grid"><a class="ix-card" href="1-ai-basics.html"><span class="ix-ep">1편</span><b>AI 기본 이론</b><span class="ix-d">AI가 답을 만드는 원리, 토큰, 환각, 모델·생각 깊이, 프롬프트, 안전 수칙</span></a><a class="ix-card" href="2-pptx-slides.html"><span class="ix-ep">2편</span><b>수업 PPT 만들기</b><span class="ix-d">지침서·글꼴·에셋을 담은 작업 폴더로 매번 같은 품질의 PPTX</span></a><a class="ix-card" href="3-student-webapp.html"><span class="ix-ep">3편</span><b>학생 참여형 웹앱</b><span class="ix-d">바이브코딩으로 만들고 GitHub·Netlify로 배포, 가지로 새 버전</span></a><a class="ix-card" href="4-image-generation.html"><span class="ix-ep">4편</span><b>이미지 생성해 보기</b><span class="ix-d">설계표로 수업 그림 만들기, 한 가지씩 고치기, 캐릭터 유지, 점검표와 AI 표시</span></a><a class="ix-card" href="5-video-generation.html"><span class="ix-ep">5편</span><b>영상 생성해 보기</b><span class="ix-d">카메라 움직임·장면 설계, 그림에서 영상으로, 스토리보드와 편집, 딥페이크 안전 수칙</span></a><a class="ix-card" href="6-assessment-design.html"><span class="ix-ep">6편</span><b>평가 구상·설계</b><span class="ix-d">성취기준에서 채점 기준·문항·피드백·웹 형성평가 설계서까지</span></a><a class="ix-card" href="7-data-collection.html"><span class="ix-ep">7편</span><b>결과 수집·데이터화</b><span class="ix-d">구글 시트 저장소, 학생 정보 보호, 정답률·오답 분석</span></a></div>
+  </section>
+  <section style="display:grid;gap:12px">
+    <h2>특별편</h2>
+    <p class="path">필요한 주제만 골라 들어도 됩니다.</p>
+    <div class="grid"><a class="ix-card sp" href="special-agent-ai.html"><span class="ix-ep">특별편</span><b>에이전트 AI</b><span class="ix-d">일을 끝까지 맡기는 에이전트 사용법과 안전 수칙</span></a><a class="ix-card sp" href="special-token-saving.html"><span class="ix-ep">특별편</span><b>토큰 절약</b><span class="ix-d">어떤 AI에서든 한도를 아끼는 대화 습관 여섯 가지</span></a><a class="ix-card sp" href="special-html-slides.html"><span class="ix-ep">특별편</span><b>HTML 슬라이드</b><span class="ix-d">PPT의 대항마, 활동이 슬라이드 안에 들어 있는 수업 자료</span></a><a class="ix-card sp" href="special-prompt-sites.html"><span class="ix-ep">특별편</span><b>프롬프트 도우미 사이트</b><span class="ix-d">디자인·색·글꼴을 대신 말해 주는 사이트 모음과 쓰는 법</span></a></div>
+  </section>
+  <footer>각 AI 서비스와 GitHub·Netlify·구글의 메뉴 이름은 업데이트로 바뀔 수 있습니다. 학생 개인정보와 평가 관련 판단은 학교·교육청 지침을 따릅니다. 실습 체크 표시는 각자의 브라우저에만 저장됩니다.</footer>
+</div>
+</body>
+</html>
