@@ -28,6 +28,14 @@ h2{font-family:var(--f-display);font-size:22px;margin:0}
 .ix-d{font-size:14px;color:var(--muted)}
 .ix-card.sp{border-style:dashed}
 .path{font-size:15px;color:var(--muted);margin:0}
+.view{background:var(--sheet);border:1.5px solid var(--accent);border-radius:12px;padding:20px;display:grid;gap:14px}
+.view .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.view p{margin:0;font-size:15.5px}
+.vs2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vs2 div{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:4px;align-content:start;font-size:14.5px}
+.vs2 b{font-size:15px}.vs2 .no b{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}.vs2 .yes{border-color:var(--accent)}.vs2 .yes b{color:var(--accent)}
+.vs2 span{color:var(--muted)}
+@media (max-width:560px){.vs2{grid-template-columns:1fr}}
 footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
 </style>
 </head>
@@ -38,6 +46,15 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h1>코드 한 줄 몰라도, <span class="mark">말로 만드는 수업</span></h1>
     <p class="lead">AI가 답하는 원리부터 수업 PPT, 학생 참여형 웹앱, 이미지·영상 생성, 평가 설계, 결과 데이터화까지. 각 편을 차례로 따라가면 내 수업에 바로 쓸 자료가 하나씩 완성됩니다.</p>
   </header>
+  <section class="view" aria-labelledby="h-view">
+    <span class="k">이 연수의 관점</span>
+    <h2 id="h-view">AI를 쓰기 위한 수업이 아니라, <span class="mark">수업에 AI가 필요할 때</span> 꺼내 쓸 수 있는 선생님</h2>
+    <p>수업의 출발점은 언제나 학생이 배워야 할 것입니다. AI는 그 배움에 도움이 될 때 꺼내는 도구이고, 필요 없을 때는 내려놓아도 됩니다. 이 연수는 AI를 수업의 목적으로 만들지 않고, 필요한 순간에 자신 있게 고를 수 있도록 선택지를 늘려 드립니다.</p>
+    <div class="vs2">
+      <div class="no"><b>AI로 뭘 해 볼까?</b><span>도구에서 출발하면 AI를 썼다는 사실이 목표가 됩니다.</span></div>
+      <div class="yes"><b>이 배움에 AI가 필요한가?</b><span>목표에서 출발하면 AI는 시간을 벌어 주고 배움을 넓히는 도구가 됩니다.</span></div>
+    </div>
+  </section>
   <section style="display:grid;gap:12px">
     <h2>정규편</h2>
     <p class="path">1편부터 순서대로 들으면 가장 좋습니다. 1편은 모든 편의 바탕입니다.</p>
