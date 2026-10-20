@@ -24,6 +24,7 @@
 | 파일 | 내용 |
 |---|---|
 | `2-pptx-slides.html` | 수업 PPT 만들기 · 지침서·글꼴·에셋을 담은 작업 폴더로 매번 같은 품질의 PPTX |
+| `worksheet.html` | 학습지 만들기 · 설계표, 한글(HWPX)·Word(DOCX)·HTML→PDF 세 가지 완성법, 수준별 버전과 정답지, 인쇄 전 점검 |
 | `3-student-webapp.html` | 학생 참여형 웹앱 · 바이브코딩으로 만들고 GitHub·Netlify로 배포, 가지로 새 버전 |
 | `4-image-generation.html` | 이미지 생성해 보기 · 그림 설계표, 한 가지씩 고치기, 같은 캐릭터 유지, 글자·도식 따로, 점검표와 AI 표시 |
 | `5-video-generation.html` | 영상 생성해 보기 · 카메라 움직임과 장면 설계, 그림에서 영상으로, 스토리보드·편집, 딥페이크 안전 수칙 |
