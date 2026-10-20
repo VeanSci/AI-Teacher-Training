@@ -650,6 +650,21 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 @media (prefers-reduced-motion:reduce){.cl-bar i{transition:none}}
 .series .series-g{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--accent);margin-top:8px}
 .journey .jg{grid-column:1/-1;margin:6px 0 0;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.rk-head{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.rk-head b{font-size:17px}
+.rk{display:grid;gap:10px}
+.rk-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rk-list li{display:grid;grid-template-columns:24px minmax(0,1.3fr) minmax(0,1fr) 4.2em;gap:10px;align-items:center;font-size:14px}
+.rk-n{font-family:var(--f-mono);color:var(--muted);text-align:center}
+.rk-m{display:grid;line-height:1.35;min-width:0}
+.rk-m b{font-weight:500;overflow-wrap:anywhere}
+.rk-m small{color:var(--muted);font-size:12px}
+.rk-bar{height:12px;background:var(--code);border-radius:6px;overflow:hidden}
+.rk-bar i{display:block;height:100%;background:color-mix(in srgb,var(--accent) 45%,var(--sheet));border-radius:6px}
+.rk-list li.top .rk-bar i{background:var(--accent)}
+.rk-list li.top .rk-n{color:var(--accent);font-weight:700}
+.rk-v{font-family:var(--f-mono);font-size:13px;text-align:right}
+@media (max-width:560px){.rk-list li{grid-template-columns:20px minmax(0,1fr) 3.8em}.rk-bar{grid-column:2/-1;grid-row:2}}
 [hidden]{display:none!important}
 </style>
 <style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}.series a,.series .cur{grid-template-columns:minmax(0,1fr)}.series a.series-h{display:block;text-decoration:none;color:var(--muted)}.series a.series-h:hover{color:var(--accent)}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
@@ -684,6 +699,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
     <a class="series-h" href="index.html">연수 시리즈 · 전체 목차</a>
     <span class="series-g">이론</span>
     <a href="1-ai-basics.html"><span>AI 기본 이론</span></a>
+    <a href="ai-rankings.html"><span>부문별 AI 순위</span></a>
     <a href="special-agent-ai.html"><span>에이전트 AI</span></a>
     <a href="special-token-saving.html"><span>토큰 절약</span></a>
     <a href="special-prompt-sites.html"><span>프롬프트 도우미 사이트</span></a>
@@ -1935,6 +1951,38 @@ function clR(){
 }
 document.querySelectorAll('[data-cl]').forEach(c=>c.addEventListener('change',()=>{c.checked?sel.add(+c.dataset.cl):sel.delete(+c.dataset.cl);store.set('cl',[...sel]);clR()}));
 clR();
+}
+
+if(document.querySelector('.rk-box')){
+const RK={
+ iq:{t:'생각하기',u:'지능 지수 · 높을수록 좋음',base:30,r:[['Claude Opus 5.5','Anthropic',58],['Claude Fable 5.1','Anthropic',53],['GPT-6 Astra','OpenAI',53],['Gemini 4 Argon','Google',53],['Muse Wonder','Meta',52],['GPT-6.1 Sol','OpenAI',52],['Grok 4.7','xAI',46],['MiMo-V2.6-Pro','Xiaomi',46],['DeepSeek V4.1 Flash','DeepSeek',45],['GLM-5.3','Z.ai',45]],n:'어려운 분석과 긴 글에서는 Claude Opus 5.5가 단독 1위입니다. 2위권은 세 회사가 같은 53점으로 사실상 동점입니다.'},
+ speed:{t:'빠르기',u:'초당 출력 토큰 · 높을수록 좋음',base:0,r:[['DeepSeek V4.1 Flash','DeepSeek',216],['Muse Wonder','Meta',161],['Claude Opus 5.5','Anthropic',95],['Grok 4.7','xAI',94],['GLM-5.3','Z.ai',91],['Gemini 4 Argon','Google',85],['Claude Fable 5.1','Anthropic',69],['GPT-6 Astra','OpenAI',66],['GPT-6.1 Sol','OpenAI',56],['MiMo-V2.6-Pro','Xiaomi',50]],n:'가장 빠른 DeepSeek V4.1 Flash는 생각하기에서는 9위입니다. 빠르기와 깊이는 함께 가지 않습니다.'},
+ cost:{t:'싼 값',u:'작업당 비용 · 낮을수록 좋음',low:true,f:v=>'$'+v.toFixed(2),r:[['MiMo-V2.6-Pro','Xiaomi',0.13],['DeepSeek V4.1 Flash','DeepSeek',0.26],['GPT-6.1 Sol','OpenAI',0.72],['Gemini 4 Argon','Google',1.99],['GLM-5.3','Z.ai',2.01],['GPT-6 Astra','OpenAI',3.26],['Grok 4.7','xAI',3.74],['Muse Wonder','Meta',4.52],['Claude Opus 5.5','Anthropic',5.98],['Claude Fable 5.1','Anthropic',7.63]],n:'생각하기 1위 Claude Opus 5.5는 가장 싼 모델의 약 46배입니다. GPT-6.1 Sol은 생각하기 52점에 $0.72로 값 대비 성능이 눈에 띕니다.'},
+ code:{t:'성능',u:'Coding Agent Index · 높을수록 좋음',base:40,r:[['Claude Code · Sonnet 5.5','Anthropic',68],['Claude Code · Opus 5.5','Anthropic',66],['Antigravity CLI · Gemini 4 Argon','Google',64],['Muse Code · Wonder','Meta',63],['Claude Code · Fable 5.1','Anthropic',62],['Codex · GPT-6 Astra','OpenAI',62],['Codex · GPT-6.1 Sol','OpenAI',60],['Grok Build · Grok 4.7','xAI',56]],n:'일을 끝까지 맡기는 코딩 에이전트에서는 Claude Code가 1·2위입니다.'},
+ ctime:{t:'작업당 시간',u:'한 작업에 걸린 시간(분) · 짧을수록 좋음',low:true,f:v=>v>=60?(v/60).toFixed(1)+'시간':v+'분',r:[['Muse Code · Wonder','Meta',22.4],['Codex · GPT-6.1 Sol','OpenAI',24.4],['Codex · GPT-6 Astra','OpenAI',29.4],['Antigravity CLI · Gemini 4 Argon','Google',34.5],['Claude Code · Fable 5.1','Anthropic',34.8],['Grok Build · Grok 4.7','xAI',39.2],['Claude Code · Opus 5.5','Anthropic',66],['Claude Code · Sonnet 5.5','Anthropic',90]],n:'성능 1위 Claude Code · Sonnet 5.5는 시간이 가장 오래 걸립니다(1.5시간). 꼼꼼함과 빠르기를 맞바꾼 셈입니다.'},
+ ccost:{t:'작업당 비용',u:'API 비용 · 낮을수록 좋음',low:true,f:v=>'$'+v.toFixed(2),r:[['Codex · GPT-6.1 Sol','OpenAI',1.55],['Antigravity CLI · Gemini 4 Argon','Google',5.84],['Codex · GPT-6 Astra','OpenAI',7.47],['Muse Code · Wonder','Meta',8.05],['Grok Build · Grok 4.7','xAI',8.82],['Claude Code · Fable 5.1','Anthropic',12.39],['Claude Code · Opus 5.5','Anthropic',13.04],['Claude Code · Sonnet 5.5','Anthropic',14.19]],n:'가장 싸고 빠른 쪽은 Codex(GPT-6.1 Sol)입니다. 성능·시간·비용을 함께 봐야 하는 이유입니다.'},
+ img:{t:'그림 만들기',u:'비교 투표 Elo · 높을수록 좋음 · 괄호는 1천 장당 API 가격',base:1050,r:[['GPT Image 2.5 Sunburst','OpenAI · $210.7',1220],['GPT Image 2.5 Flare','OpenAI · $210.7',1207],['GPT Image 2','OpenAI · $211.0',1186],['Nano Banana 2.1','Google · $33.6',1174],['Grok Imagine Image 2.0','xAI · $60.0',1167],['MAI-Image-2.6','Microsoft · $38.9',1166],['Nano Banana 2','Google · $67.0',1140],['Muse Image','Meta · $10.0',1127],['GPT Image 1.5','OpenAI · $133.0',1123],['MAI-Image-2.6-Flash','Microsoft · $19.5',1119]],n:'OpenAI가 1~3위입니다. 4위 Nano Banana 2.1(Gemini)은 1위의 약 1/6 값이고, Muse Image는 $10로 가장 저렴합니다.'},
+ edit:{t:'그림 고치기',u:'비교 투표 Elo · 높을수록 좋음',base:1050,r:[['GPT Image 2.5 Sunburst','OpenAI',1199],['GPT Image 2.5 Flare','OpenAI',1182],['Nano Banana 2.1','Google',1152],['MAI-Image-2.6','Microsoft',1152],['MAI-Image-2.6-Flash','Microsoft',1144],['GPT Image 2','OpenAI',1138],['Seedream 5.0 Pro','ByteDance',1133],['Muse Image','Meta',1131],['MAI-Image-2.5','Microsoft',1128],['Nano Banana 2','Google',1124]],n:'사진을 첨부해 부분만 바꾸는 고치기에서는 Nano Banana 2.1이 만들기(4위)보다 높은 3위입니다.'},
+ t2v:{t:'글로 만들기',u:'소리 포함 영상 Elo · 높을수록 좋음 · 괄호는 1분당 API 가격',base:1000,r:[['Wan 3.0','Alibaba · $12.00',1173],['Utopai X','Utopai · API 없음',1166],['Dreamina Seedance 2.5','ByteDance · $34.12',1159],['FLUX 3 Max (720p)','Black Forest Labs · $2.55',1159],['MiniMax H3 (768p)','MiniMax · $4.80',1158],['MiniMax H3 Max','MiniMax · $4.80',1156],['FLUX 3','Black Forest Labs · $17.40',1145],['Dreamina Seedance 2.0','ByteDance · $22.45',1138],['Gemini Omni Flash 1.1','Google · $9.12',1132],['Agnes-Video-2.5','Agnes · $2.40',1069]],n:'상위 6개가 17점 안에 몰려 있어 사실상 동점입니다. 범용 AI보다 영상 전문 회사가 강하고, Gemini는 9위입니다.'},
+ i2v:{t:'그림으로 만들기',u:'소리 포함 영상 Elo · 높을수록 좋음',base:1000,r:[['MiniMax H3 (768p)','MiniMax',1140],['FLUX 3 Max (720p)','Black Forest Labs',1138],['Dreamina Seedance 2.5','ByteDance',1138],['Gemini Omni Flash 1.1','Google',1132],['Wan 3.0','Alibaba',1127],['MiniMax H3 Max','MiniMax',1125],['Dreamina Seedance 2.0','ByteDance',1121],['FLUX 3','Black Forest Labs',1086],['Grok Imagine Video 1.5','xAI',1067],['HappyHorse-1.1','Alibaba',1061]],n:'글로 만들기 1위 Wan 3.0이 여기서는 5위, Gemini는 9위에서 4위로 올라옵니다. 같은 영상 AI도 출발점에 따라 순위가 바뀝니다.'},
+ tts:{t:'글 읽어 주기',u:'제공 음성 비교 투표 Elo · 높을수록 좋음',base:1150,r:[['Eleven v4 Turbo','ElevenLabs',1332],['Eleven v4','ElevenLabs',1329],['Qwen-Audio-3.1-TTS-Plus','Alibaba',1297],['Sonic 3.6','Cartesia',1291],['Gemini 3.8 Flash TTS','Google',1280],['Qwen-Audio-3.0-TTS-Plus','Alibaba',1264],['Realtime TTS-2','—',1262],['Gemini 3.8 Flash-Lite TTS','Google',1252],['Fish Audio Drama 3 Preview','Fish Audio',1247],['Simba 3.2','Speechify',1245]],n:'목소리 전문 회사 ElevenLabs가 1·2위입니다. 영상 내레이션이나 읽기 자료 음성에 참고할 수 있습니다.'},
+ clone:{t:'같은 목소리로 비교',u:'같은 복제 음성 8개(영어)로 비교한 Elo · 높을수록 좋음',base:1000,r:[['HeyGen Voice','HeyGen',1200],['Qwen-Audio-3.1-TTS-Plus','Alibaba',1185],['Eleven v4 Turbo','ElevenLabs',1158],['Eleven v4','ElevenLabs',1158],['Sonic 3.6','Cartesia',1151],['Realtime TTS-2','—',1147],['Qwen-Audio-3.0-TTS-Plus','Alibaba',1126],['Sonic 3.5','Cartesia',1118],['Simba 3.2','Speechify',1087],['StepAudio 2.5 TTS','StepFun',1078]],n:'같은 목소리 조건에서는 순위가 바뀝니다. 다만 목소리 복제는 실제 사람 목소리를 흉내 낼 수 있어, 수업에서는 쓰지 않습니다.'},
+ song:{t:'노래',u:'보컬 음악 Elo · 높을수록 좋음',base:950,r:[['Suno v6','Suno',1146],['Suno v6-mini','Suno',1130],['Mureka V9.5','Mureka',1107],['Mureka V9','Mureka',1057],['Lyria 3.5','Google',1052],['Lyria 3 Pro','Google',1051],['Eleven Music v2.5','ElevenLabs',1012],['MiniMax Music 3.0','MiniMax',1000],['Eleven Music v2','ElevenLabs',999],['Eleven Music','ElevenLabs',999]],n:'노래는 음악 전문 서비스 Suno가 1·2위입니다. Gemini의 Lyria는 5·6위입니다.'},
+ inst:{t:'연주곡',u:'연주 음악 Elo · 높을수록 좋음',base:950,r:[['Suno v6','Suno',1148],['Suno v6-mini','Suno',1114],['Mureka V9.5','Mureka',1084],['Mureka V9','Mureka',1083],['Lyria 3 Pro','Google',1080],['Lyria 3.5','Google',1078],['Eleven Music','ElevenLabs',1021],['Stable Audio 3 Large','Stability AI',1014],['Eleven Music v2','ElevenLabs',1011],['MiniMax Music 2.5+','MiniMax',1007]],n:'연주곡도 Suno가 앞서고, 3~6위는 사실상 동점입니다.'}
+};
+document.querySelectorAll('.rk-box').forEach(box=>{
+  const cats=box.dataset.cats.split(',');const sk='rk_'+cats[0];let cur=store.get(sk,cats[0]);if(!cats.includes(cur))cur=cats[0];
+  const pk=box.querySelector('.rk-cats'),list=box.querySelector('.rk-list'),note=box.querySelector('.rk-note'),title=box.querySelector('.rk-title'),unit=box.querySelector('.rk-unit');
+  if(cats.length>1)pk.innerHTML=cats.map(k=>'<button type="button" class="pk" data-rkc="'+k+'">'+esc(RK[k].t)+'</button>').join('');else pk.remove();
+  function R(){const c=RK[cur];const f=c.f||(v=>String(v));
+    box.querySelectorAll('[data-rkc]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.rkc===cur?'true':'false'));
+    title.textContent=c.t;unit.textContent=c.u;note.textContent=c.n;
+    const vals=c.r.map(x=>x[2]),mx=Math.max(...vals),base=c.base||0;
+    list.innerHTML=c.r.map((x,i)=>{const w=c.low?Math.max(5,x[2]/mx*100):Math.max(5,(x[2]-base)/(mx-base)*100);
+      return '<li class="'+(i===0?'top':'')+'"><span class="rk-n">'+(i+1)+'</span><span class="rk-m"><b>'+esc(x[0])+'</b><small>'+esc(x[1])+'</small></span><span class="rk-bar"><i style="width:'+w+'%"></i></span><span class="rk-v">'+esc(f(x[2]))+'</span></li>'}).join('');}
+  box.querySelectorAll('[data-rkc]').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.rkc;store.set(sk,cur);R()}));
+  R();
+});
 }
 
 /* 체크 · 진행 */
