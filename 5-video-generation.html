@@ -633,9 +633,26 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 .vu-res .lab{font-family:var(--f-mono);font-size:11.5px;color:var(--accent)}
 .vu-res ul{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14.5px}
 
+.api-flow>div{transition:border-color .2s,box-shadow .2s}
+.api-flow>div.on{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+.api-detail{font-size:14.5px;min-height:3em;margin:0}
+.cl-bar{display:flex;height:44px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--code)}
+.cl-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12.5px;white-space:nowrap;overflow:hidden;transition:width .3s}
+.cl-bar span{padding:0 6px;overflow:hidden;text-overflow:ellipsis}
+.cl-in{background:color-mix(in srgb,var(--muted) 35%,var(--sheet));color:var(--ink)}
+.cl-ex{background:var(--warn);color:var(--sheet)}
+.cl-ge{background:var(--ok);color:var(--sheet)}
+.cl-ge.thin span{display:none}
+.cl-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted)}
+.cl-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#clItems{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:560px){#clItems{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.cl-bar i{transition:none}}
+.series .series-g{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--accent);margin-top:8px}
+.journey .jg{grid-column:1/-1;margin:6px 0 0;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--accent)}
 [hidden]{display:none!important}
 </style>
-<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}.series a.series-h{display:block;text-decoration:none;color:var(--muted)}.series a.series-h:hover{color:var(--accent)}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}.series a,.series .cur{grid-template-columns:minmax(0,1fr)}.series a.series-h{display:block;text-decoration:none;color:var(--muted)}.series a.series-h:hover{color:var(--accent)}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
 <body>
 
@@ -643,7 +660,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 <div class="app">
 <aside class="side">
   <div class="brand">
-    <span class="eyebrow">중학교 교원 자율연수 · 5편</span>
+    <span class="eyebrow">중학교 교원 자율연수 · 실습</span>
     <h1>영상 생성해 보기</h1>
     <p class="sub">장면과 카메라 움직임을 말로 지시해 짧은 영상을 만들고, 스토리보드로 이어 붙여 수업 도입 영상을 완성합니다.</p>
   </div>
@@ -660,23 +677,25 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
       <li><button type="button" class="sub-item" data-p="s41"><span class="no">4-1</span><span>틀기 전 점검표</span><span class="tick">✓</span></button></li>
       <li><button type="button" class="sub-item" data-p="s42"><span class="no">4-2</span><span>딥페이크와 안전 수칙</span><span class="tick">✓</span></button></li>
       <li><button type="button" class="sub-item" data-p="s43"><span class="no">4-3</span><span>수업에 넣는 네 가지 방법</span><span class="tick">✓</span></button></li>
-      <li><button type="button" data-p="sum"><span class="no">5</span><span>정리와 다음 편</span><span class="tick">✓</span></button></li>
+      <li><button type="button" data-p="sum"><span class="no">5</span><span>정리와 다음 연수</span><span class="tick">✓</span></button></li>
     </ul>
   </nav>
   <div class="progress"><span id="progText">실습 체크</span><div class="bar"><i id="progBar"></i></div></div>
   <nav class="series" aria-label="연수 시리즈">
     <a class="series-h" href="index.html">연수 시리즈 · 전체 목차</a>
-    <a href="1-ai-basics.html"><span class="ep">1편</span><span>AI 기본 이론</span></a>
-    <a href="2-pptx-slides.html"><span class="ep">2편</span><span>수업 PPT 만들기</span></a>
-    <a href="3-student-webapp.html"><span class="ep">3편</span><span>학생 참여형 웹앱</span></a>
-    <a href="4-image-generation.html"><span class="ep">4편</span><span>이미지 생성해 보기</span></a>
-    <span class="cur" aria-current="page"><span class="ep">5편</span><span>영상 생성해 보기</span></span>
-    <a href="6-assessment-design.html"><span class="ep">6편</span><span>평가 구상·설계</span></a>
-    <a href="7-data-collection.html"><span class="ep">7편</span><span>결과 수집·데이터화</span></a>
-    <a href="special-agent-ai.html"><span class="ep">특별편</span><span>에이전트 AI</span></a>
-    <a href="special-token-saving.html"><span class="ep">특별편</span><span>토큰 절약</span></a>
-    <a href="special-html-slides.html"><span class="ep">특별편</span><span>HTML 슬라이드</span></a>
-    <a href="special-prompt-sites.html"><span class="ep">특별편</span><span>프롬프트 도우미 사이트</span></a>
+    <span class="series-g">이론</span>
+    <a href="1-ai-basics.html"><span>AI 기본 이론</span></a>
+    <a href="special-agent-ai.html"><span>에이전트 AI</span></a>
+    <a href="special-token-saving.html"><span>토큰 절약</span></a>
+    <a href="special-prompt-sites.html"><span>프롬프트 도우미 사이트</span></a>
+    <span class="series-g">실습</span>
+    <a href="2-pptx-slides.html"><span>수업 PPT 만들기</span></a>
+    <a href="3-student-webapp.html"><span>학생 참여형 웹앱</span></a>
+    <a href="4-image-generation.html"><span>이미지 생성해 보기</span></a>
+    <span class="cur" aria-current="page"><span>영상 생성해 보기</span></span>
+    <a href="6-assessment-design.html"><span>평가 구상·설계</span></a>
+    <a href="7-data-collection.html"><span>결과 수집·데이터화</span></a>
+    <a href="special-html-slides.html"><span>HTML 슬라이드</span></a>
   </nav>
 </aside>
 
@@ -684,8 +703,8 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 <!-- 1 -->
 <section class="page" data-page="intro" aria-labelledby="h-intro">
   <div class="page-head"><span class="kicker">이해하기 · 약 6분</span><h2 id="h-intro" tabindex="-1"><span class="num">1</span>영상 AI는 무엇을 할까</h2></div>
-  <div class="meta"><span>대상 <b>4편을 마친 중학교 선생님</b></span><span>소요 시간 <b>약 60분</b></span><span>준비물 <b>4편에서 만든 그림 한 장, 영상 AI 계정 하나</b></span></div>
-  <div class="prose"><p>영상 AI는 4편의 그림 AI가 <b>시간 축으로 확장</b>된 것입니다. 한 장이 아니라 1초에 수십 장의 그림을 앞뒤가 이어지도록 함께 그리고, 요즘은 효과음과 짧은 대사까지 만듭니다. 대신 한 번에 만드는 길이가 <span class="mark">대개 4~10초로 짧고</span>, 그림보다 훨씬 많은 사용량이 듭니다. 그래서 영상은 <span class="mark">설계를 끝낸 뒤 한 번에</span> 만드는 것이 요령입니다.</p></div>
+  <div class="meta"><span>대상 <b>「이미지 생성해 보기」를 마친 중학교 선생님</b></span><span>소요 시간 <b>약 60분</b></span><span>준비물 <b>「이미지 생성해 보기」에서 만든 그림 한 장, 영상 AI 계정 하나</b></span></div>
+  <div class="prose"><p>영상 AI는 「이미지 생성해 보기」의 그림 AI가 <b>시간 축으로 확장</b>된 것입니다. 한 장이 아니라 1초에 수십 장의 그림을 앞뒤가 이어지도록 함께 그리고, 요즘은 효과음과 짧은 대사까지 만듭니다. 대신 한 번에 만드는 길이가 <span class="mark">대개 4~10초로 짧고</span>, 그림보다 훨씬 많은 사용량이 듭니다. 그래서 영상은 <span class="mark">설계를 끝낸 뒤 한 번에</span> 만드는 것이 요령입니다.</p></div>
   <div class="bw">
     <div><span class="bw-n">1</span><b>설계</b><span>스토리보드와 장면 프롬프트는 글 AI로 (무료로 여러 번)</span></div>
     <span class="bw-a" aria-hidden="true">→</span>
@@ -708,7 +727,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
   <div class="ai-grid" role="group" aria-label="AI 선택">
     <button class="ai" type="button" data-ai="gemini" aria-pressed="false">
       <span class="tag">GEMINI · VEO</span><span class="nm">Gemini</span>
-      <span class="feat">소리까지 들어간 8초 안팎의 영상. 4편에서 만든 그림을 첫 장면으로 쓰기 좋아요.</span>
+      <span class="feat">소리까지 들어간 8초 안팎의 영상. 「이미지 생성해 보기」에서 만든 그림을 첫 장면으로 쓰기 좋아요.</span>
       <span class="pick">✓ 선택됨</span></button>
     <button class="ai" type="button" data-ai="chatgpt" aria-pressed="false">
       <span class="tag">OPENAI · SORA</span><span class="nm">ChatGPT · Sora</span>
@@ -735,7 +754,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 <!-- 3-1 -->
 <section class="page" data-page="s31" aria-labelledby="h-s31" hidden>
   <div class="page-head"><span class="kicker">만들기 1 · 약 12분</span><h2 id="h-s31" tabindex="-1"><span class="num">3-1</span>한 컷 장면 설계하기</h2></div>
-  <p class="why">영상 프롬프트는 4편의 그림 설계표에 <b>동작</b>, <b>카메라</b>, <b>소리</b>, <b>길이</b>가 더해진 것입니다. 그중 초보와 고수를 가르는 것이 카메라입니다. 먼저 카메라 움직임을 눈으로 익혀 보세요.</p>
+  <p class="why">영상 프롬프트는 「이미지 생성해 보기」의 그림 설계표에 <b>동작</b>, <b>카메라</b>, <b>소리</b>, <b>길이</b>가 더해진 것입니다. 그중 초보와 고수를 가르는 것이 카메라입니다. 먼저 카메라 움직임을 눈으로 익혀 보세요.</p>
   <p class="label">① 카메라 움직임 고르기</p>
   <div class="picker" id="camPick" role="group" aria-label="카메라 움직임"></div>
   <div class="cam-stage" id="camStage" role="img" aria-label="선택한 카메라 움직임을 보여 주는 풍경 미리보기"><div class="cam-world" id="camWorld"><i class="c-sun"></i><i class="c-m1"></i><i class="c-m2"></i><i class="c-ground"></i><i class="c-trunk"></i><i class="c-leaf"></i><i class="c-kid"></i><i class="c-head"></i></div></div>
@@ -767,9 +786,9 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 <!-- 3-2 -->
 <section class="page" data-page="s32" aria-labelledby="h-s32" hidden>
   <div class="page-head"><span class="kicker">만들기 2 · 약 8분</span><h2 id="h-s32" tabindex="-1"><span class="num">3-2</span>그림에서 영상으로</h2></div>
-  <p class="why">글로만 지시하면 매번 다른 얼굴, 다른 색이 나옵니다. 4편에서 다듬은 그림을 <b>첫 장면</b>으로 첨부하면, AI는 그 그림을 그대로 출발점으로 삼아 움직임만 더합니다. 결과가 훨씬 예측 가능해지고 여러 컷의 분위기도 맞출 수 있습니다.</p>
+  <p class="why">글로만 지시하면 매번 다른 얼굴, 다른 색이 나옵니다. 「이미지 생성해 보기」에서 다듬은 그림을 <b>첫 장면</b>으로 첨부하면, AI는 그 그림을 그대로 출발점으로 삼아 움직임만 더합니다. 결과가 훨씬 예측 가능해지고 여러 컷의 분위기도 맞출 수 있습니다.</p>
   <div class="three">
-    <div><span class="tn3">①</span><b>첫 장면 그림 준비</b><span>4편 3-1·3-3으로 만든 글자 없는 그림. 영상과 같은 비율로</span></div>
+    <div><span class="tn3">①</span><b>첫 장면 그림 준비</b><span>「이미지 생성해 보기」 3-1·3-3으로 만든 글자 없는 그림. 영상과 같은 비율로</span></div>
     <div><span class="tn3">②</span><b>그림 첨부</b><span>동영상 만들기 화면에서 그림을 첨부(또는 "이미지로 시작")</span></div>
     <div><span class="tn3">③</span><b>움직임만 지시</b><span>그림에 이미 있는 것은 다시 설명하지 말고 동작·카메라·소리만</span></div>
   </div>
@@ -778,7 +797,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
     <div class="phrase"><div class="q"><span class="cat">마지막 장면 이어 가기</span><span id="vdNext">방금 영상의 마지막 장면을 첫 장면으로 해서 다음 컷을 이어서 만들어 줘. 인물과 배경은 그대로, 이번에는 카메라가 오른쪽으로 패닝하며 멀리 있는 화산을 보여 줘.</span></div><button class="btn ghost sm" type="button" data-copy="vdNext">복사</button></div>
   </div>
   <div class="note"><b>첨부 주의</b><span>첫 장면으로 쓰는 그림에 학생이나 실제 사람의 사진을 넣지 마세요. 실제 사람을 움직이게 만드는 것은 바로 딥페이크가 됩니다(4-2). 대부분의 서비스도 이런 요청을 막습니다.</span></div>
-  <label class="check"><input type="checkbox" id="s32_e3" data-ck="s32_e3"><span>4편에서 만든 그림을 첨부해서 움직이는 영상을 만들어 보았어요.</span></label>
+  <label class="check"><input type="checkbox" id="s32_e3" data-ck="s32_e3"><span>「이미지 생성해 보기」에서 만든 그림을 첨부해서 움직이는 영상을 만들어 보았어요.</span></label>
   <div class="pager"><button class="btn ghost" type="button" data-go="s31">← 이전</button><button class="btn" type="button" data-go="s33">다음: 스토리보드로 여러 컷 →</button></div>
 </section>
 
@@ -802,7 +821,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
     <div><b>컷마다 동작 하나</b><span>한 컷에 일이 여러 개면 컷을 나누라고 다시 요청합니다.</span></div>
     <div><b>질문으로 끝나는가</b><span>도입 영상의 할 일은 답이 아니라 궁금증입니다. 마지막 컷에서 답을 보여 주면 고칩니다.</span></div>
     <div><b>[확인 필요] 장면</b><span>표시된 장면은 교과서와 대조하고, 사실이 중요하면 실제 사진·영상 자료로 바꿉니다.</span></div>
-    <div><b>꼭 필요한 컷만</b><span>제목 화면처럼 움직임이 필요 없는 컷은 4편의 그림 한 장으로 대신해 생성 횟수를 아낍니다.</span></div>
+    <div><b>꼭 필요한 컷만</b><span>제목 화면처럼 움직임이 필요 없는 컷은 「이미지 생성해 보기」의 그림 한 장으로 대신해 생성 횟수를 아낍니다.</span></div>
   </div>
   <label class="check"><input type="checkbox" id="s33_e4" data-ck="s33_e4"><span>스토리보드를 받아 확인하고, 컷마다 장면 프롬프트를 준비했어요.</span></label>
   <div class="pager"><button class="btn ghost" type="button" data-go="s32">← 이전</button><button class="btn" type="button" data-go="s34">다음: 이어 붙이고 자막 넣기 →</button></div>
@@ -811,14 +830,14 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 <!-- 3-4 -->
 <section class="page" data-page="s34" aria-labelledby="h-s34" hidden>
   <div class="page-head"><span class="kicker">만들기 4 · 약 10분</span><h2 id="h-s34" tabindex="-1"><span class="num">3-4</span>이어 붙이고 자막·내레이션 넣기</h2></div>
-  <p class="why">만든 컷을 순서대로 놓고, 글자와 목소리를 더하면 한 편의 영상이 됩니다. 영상 AI가 약한 글자와 정확한 설명을 편집 단계에서 채웁니다.</p>
+  <p class="why">만든 컷을 순서대로 놓고, 글자와 목소리를 더하면 한 편의 영상이 됩니다. 영상 AI가 약한 글자와 정확한 설명을 편집 단계에서 채웁니다. 단, 내레이션이 있으면 자막은 핵심 낱말만 넣어 같은 말을 눈과 귀로 두 번 읽게 하지 마세요(「AI 기본 이론」 3-3).</p>
   <div class="two-tools">
     <div class="sheet"><span class="lab">Canva 동영상</span><h3>클립 만들기부터 편집까지 한곳에서</h3><p>새 디자인 → <b>동영상</b>을 열고, 왼쪽 <b>업로드</b>에 받은 컷을 올려 아래 타임라인에 순서대로 끌어 놓습니다. <b>텍스트</b>로 제목과 자막을 넣고, <b>업로드 → 녹음</b>으로 내레이션을 더합니다.</p></div>
     <div class="sheet"><span class="lab">Clipchamp</span><h3>Windows에 기본으로 있는 편집기</h3><p>시작 메뉴에서 <b>Clipchamp</b>를 열고 <b>새 동영상 만들기</b> → 미디어 가져오기로 컷을 올립니다. 자동 자막과 글을 읽어 주는 음성(TTS) 기능이 있어 내레이션을 쉽게 넣을 수 있습니다.</p></div>
   </div>
   <div class="phrases">
     <div class="phrase"><div class="q"><span class="cat">내레이션 원고 · 글 AI에게</span><span id="vdNar">위 스토리보드의 컷마다 읽을 내레이션 원고를 써 줘. 컷 길이 안에 읽을 수 있게 1초에 4글자 정도로, 중학생에게 말하듯 쉬운 말로. 마지막 문장은 질문으로 끝내 줘.</span></div><button class="btn ghost sm" type="button" data-copy="vdNar">복사</button></div>
-    <div class="phrase"><div class="q"><span class="cat">자막 문구 · 글 AI에게</span><span id="vdSub">각 컷 화면 아래에 넣을 자막을 한 줄 15자 이내로 만들어 줘. 마지막 컷 자막에는 "이 영상은 AI로 만든 장면입니다"를 함께 넣어 줘.</span></div><button class="btn ghost sm" type="button" data-copy="vdSub">복사</button></div>
+    <div class="phrase"><div class="q"><span class="cat">자막 문구 · 글 AI에게</span><span id="vdSub">각 컷 화면에 넣을 자막을 만들어 줘. 내레이션을 그대로 옮기지 말고, 꼭 기억할 핵심 낱말만 한 줄 10자 이내로. 마지막 컷에는 "이 영상은 AI로 만든 장면입니다"를 넣어 줘.</span></div><button class="btn ghost sm" type="button" data-copy="vdSub">복사</button></div>
   </div>
   <div class="ai-tip"><span class="lab">TIP · 배경 음악</span><span>인터넷에서 찾은 음악은 저작권이 걸려 있을 수 있습니다. Canva·Clipchamp 안의 음악이나, 공유마당처럼 이용 조건이 분명한 곳의 음악을 쓰고 출처를 영상 끝에 적으세요.</span></div>
   <label class="check"><input type="checkbox" id="s34_e5" data-ck="s34_e5"><span>컷을 이어 붙이고 자막(또는 내레이션)을 넣어 한 편의 영상을 완성했어요.</span></label>
@@ -830,8 +849,10 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
   <div class="page-head"><span class="kicker">확인하기 1 · 약 5분</span><h2 id="h-s41" tabindex="-1"><span class="num">4-1</span>틀기 전 점검표</h2></div>
   <p class="why">영상은 지나가 버리기 때문에 오류가 그림보다 눈에 덜 띄고, 그래서 더 그대로 믿게 됩니다. 수업 전에 <b>전체 화면으로 처음부터 끝까지 두 번</b> 보며 확인하세요.</p>
   <div class="sheet" data-countbox data-unit="통과" data-done="수업에 틀어도 좋아요!" style="display:grid;gap:10px">
-    <p class="count">0 / 8 통과</p>
+    <p class="count">0 / 10 통과</p>
     <div class="verify">
+      <label><input type="checkbox" data-m="s41_q1"><span>영상이 끝나면 이 차시 목표의 질문으로 이어진다<small>멋있기만 한 영상은 탈락 · 「AI 기본 이론」 3-3 목표 정렬성</small></span></label>
+      <label><input type="checkbox" data-m="s41_q2"><span>내레이션과 똑같은 문장을 자막으로 겹쳐 띄우지 않았다<small>자막은 핵심 낱말만 · 외재적 인지부하</small></span></label>
       <label><input type="checkbox" data-m="s41_i1"><span>과학·역사 내용이 교과서와 어긋나지 않는다<small>물의 흐름, 빛의 방향, 시대 배경</small></span></label>
       <label><input type="checkbox" data-m="s41_i2"><span>물체가 갑자기 생기거나 사라지지 않는다</span></label>
       <label><input type="checkbox" data-m="s41_i3"><span>컷이 바뀌어도 인물 생김새·옷이 같다</span></label>
@@ -869,25 +890,25 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
   <div class="picker" id="vuPick" role="group" aria-label="활용 방법"></div>
   <div class="sheet vu-res" id="vuRes" aria-live="polite"></div>
   <label class="check"><input type="checkbox" id="s43_e8" data-ck="s43_e8"><span>내 수업에서 AI 영상을 쓸 방법 하나를 골라 차시 계획에 넣었어요.</span></label>
-  <div class="pager"><button class="btn ghost" type="button" data-go="s42">← 이전</button><button class="btn" type="button" data-go="sum">다음: 정리와 다음 편 →</button></div>
+  <div class="pager"><button class="btn ghost" type="button" data-go="s42">← 이전</button><button class="btn" type="button" data-go="sum">다음: 정리와 다음 연수 →</button></div>
 </section>
 
 <!-- 5 -->
 <section class="page" data-page="sum" aria-labelledby="h-sum" hidden>
-  <div class="page-head"><span class="kicker">정리 · 약 2분</span><h2 id="h-sum" tabindex="-1"><span class="num">5</span>정리와 다음 편</h2></div>
+  <div class="page-head"><span class="kicker">정리 · 약 2분</span><h2 id="h-sum" tabindex="-1"><span class="num">5</span>정리와 다음 연수</h2></div>
   <div class="table-wrap"><table class="summary">
     <thead><tr><th>페이지</th><th>핵심</th></tr></thead>
     <tbody>
       <tr><td>1</td><td>설계는 글 AI로 여러 번, 생성은 영상 AI로 꼭 필요한 컷만, 편집에서 글자·목소리</td></tr>
       <tr><td>2</td><td>Gemini·Sora·Canva로 만들고, Claude로 스토리보드·대본</td></tr>
       <tr><td>3-1</td><td>누가·동작 하나·어디서·카메라·빛·소리·길이</td></tr>
-      <tr><td>3-2</td><td>4편 그림을 첫 장면으로 첨부하면 결과가 예측 가능</td></tr>
+      <tr><td>3-2</td><td>「이미지 생성해 보기」 그림을 첫 장면으로 첨부하면 결과가 예측 가능</td></tr>
       <tr><td>3-3</td><td>8초 이하 컷으로 나눈 스토리보드, 질문으로 끝내기</td></tr>
       <tr><td>3-4</td><td>Canva·Clipchamp로 이어 붙이고 자막·내레이션·출처</td></tr>
       <tr><td>4-1~4-2</td><td>두 번 보고 점검, 실제 사람 금지, AI 표시, 공유 범위</td></tr>
       <tr><td>4-3</td><td>도입 훅, 오류 찾기, 개념 시각화, 학생 프로젝트</td></tr>
     </tbody></table></div>
-  <div class="next"><span class="eyebrow">다음 편 · 6편</span><h3>평가 구상과 설계</h3><p style="font-size:15px">이제 수업 자료와 도구에 무엇을 담을지 평가부터 정할 차례입니다. 성취기준에서 출발해 채점 기준과 문항, 피드백까지 AI와 함께 설계합니다.</p><a class="btn" href="6-assessment-design.html" style="justify-self:start;text-decoration:none">6편 바로 가기 →</a></div>
+  <div class="next"><span class="eyebrow">다음 연수 · 실습</span><h3>평가 구상과 설계</h3><p style="font-size:15px">이제 수업 자료와 도구에 무엇을 담을지 평가부터 정할 차례입니다. 성취기준에서 출발해 채점 기준과 문항, 피드백까지 AI와 함께 설계합니다.</p><a class="btn" href="6-assessment-design.html" style="justify-self:start;text-decoration:none">바로 가기 →</a></div>
   <div class="pager"><button class="btn ghost" type="button" data-go="s43">← 이전</button><button class="btn ghost" type="button" data-go="intro">처음으로</button></div>
 </section>
 </main>
@@ -901,7 +922,7 @@ const store={get(k,d){try{const v=localStorage.getItem(CFG.key+'.'+k);return v==
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const HOOKS={ai:[]};
-const AIS={"canva": {"warn": "Canva의 일반 \"공유 링크\"는 Canva 로그인을 요구할 수 있습니다. 학생용은 반드시 <b>웹사이트로 게시</b>한 주소를 쓰세요.", "store": "Canva 편집 화면의 미리보기에서는 저장이 안 될 수 있습니다. 게시한 웹사이트 주소로 열어서 확인하세요.", "edit": "Canva AI에서 지난 질문을 고치는 버튼이 보이지 않으면, 결과 창에서 <b>이전 버전</b>으로 되돌린 뒤 고친 문장을 보내세요.", "name": "Canva", "intro": "Canva의 AI 기능 중 \"코드 작성(Canva Code)\"을 사용합니다. 교사 인증된 Canva 교육용 계정이면 무료로 쓸 수 있어요.", "steps": ["<span class=\"kbd\">canva.com</span>에 로그인하고 홈 화면 상단의 <b>Canva AI</b>를 누릅니다.", "입력창 아래 옵션에서 <b>코드 작성</b>(Code)을 선택합니다.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다.", "오른쪽 미리보기에 도구가 나타나면 직접 눌러 봅니다. 코드 보기 탭은 열지 않아도 됩니다."], "tip": "Canva는 결과를 디자인 요소처럼 다룰 수 있어서, 수업 자료 슬라이드 안에 도구를 넣기 좋습니다.", "share": ["미리보기 위의 <b>디자인에서 사용</b>(또는 디자인에 추가)을 눌러 Canva 디자인으로 가져옵니다.", "<b>공유 → 웹사이트로 게시</b>를 고르면 학생이 열 수 있는 링크가 생깁니다.", "수업 슬라이드에 넣었다면 발표 모드에서 바로 실행됩니다."], "newChat": ["Canva 홈 화면 상단의 <b>Canva AI</b>를 엽니다.", "새 대화(새 채팅)를 시작합니다. 이전 대화 목록이 보이면 그 위의 <span class=\"kbd\">+</span>를 누르세요.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["Canva AI에는 다른 AI처럼 답변 방식을 저장하는 설정이 따로 없을 수 있습니다.", "대신 위 문장을 메모장에 저장해 두고, 새 대화의 첫 질문 맨 위에 붙여넣으세요."], "model": ["Canva AI에는 모델이나 생각 깊이를 고르는 메뉴가 없고, Canva가 알아서 고릅니다.", "그래서 Canva에서는 3-1처럼 첫 요청을 정확하게 쓰고 3-2처럼 묶어서 보내는 것이 사용량을 조절하는 가장 좋은 방법입니다."], "mtip": "코드가 길고 어려운 작업(7편의 데이터베이스 연결 등)은 모델을 고를 수 있는 다른 AI에서 하는 것도 방법입니다.", "extra": "Canva AI는 사용 횟수가 정해져 있습니다. 디자인 생성이나 코드 작성처럼 무거운 요청은 설계를 마친 뒤 한 번에 보내고, 간단한 문구 수정은 디자인 화면에서 직접 고치는 것이 좋습니다.", "note": "Canva에서는 학생 화면 디자인까지만 만들고, Apps Script 코드는 Gemini·ChatGPT·Claude 중 하나에서 요청하는 것을 권합니다. 무료로 쓸 수 있는 AI 하나를 함께 열어 두세요."}, "gemini": {"warn": "학교 Google Workspace 계정은 관리자 설정에 따라 학교 밖 사람이나 학생 계정이 링크를 못 열 수 있습니다. 학생 기기에서 한 번 열어 보세요.", "store": "Gemini 캔버스 미리보기에서는 저장이 안 될 수 있습니다. 공유 링크나 저장한 HTML 파일로 열어서 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(프롬프트 수정)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>업데이트</b>합니다.", "name": "Gemini", "intro": "Gemini의 \"캔버스(Canvas)\" 도구를 사용합니다. 일반 대화창 대신 캔버스를 켜야 미리보기가 보입니다.", "steps": ["<span class=\"kbd\">gemini.google.com</span>에 구글 계정으로 로그인합니다.", "입력창 아래의 <b>캔버스</b>(Canvas) 버튼을 눌러 켭니다. 보이지 않으면 <span class=\"kbd\">도구</span> 메뉴 안에 있어요.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다.", "오른쪽 창 상단의 <b>미리보기</b> 탭에서 도구를 직접 눌러 봅니다."], "tip": "학교 Google Workspace 계정은 관리자가 Gemini를 막아 둔 경우가 있습니다. 안 되면 개인 계정으로 실습하세요.", "share": ["캔버스 오른쪽 위의 <b>공유</b> 버튼을 눌러 링크를 만듭니다.", "링크를 클래스룸 공지나 QR코드로 학생에게 전달합니다.", "파일로 보관하려면 코드 탭에서 <b>복사</b> 후 메모장에 붙여 <span class=\"kbd\">도구이름.html</span>로 저장합니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "코드를 이어서 고칠 거라면 입력창 아래 <b>캔버스</b>를 다시 켭니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["왼쪽 아래 <b>설정</b>을 엽니다.", "<b>저장된 정보</b>(또는 개인 맞춤 설정) 메뉴에 위 문장을 추가합니다.", "자주 만드는 도구가 있다면 <b>Gem</b>을 새로 만들어 지침 칸에 붙여넣어도 됩니다."], "model": ["입력창 오른쪽 아래의 <b>모델 메뉴</b>를 엽니다.", "<b>Flash-Lite</b>는 가볍고 빠름, <b>Flash</b>는 균형, <b>Pro</b>는 가장 강력한 모델입니다.", "생각 깊이(낮음·보통·높음) 설정이 차례로 추가되고 있습니다. 보이지 않으면 <b>Extended thinking</b> 같은 생각 옵션을 찾아보세요."], "mtip": "2026년 10월부터 요금제가 없는 개인 구글 계정은 Flash-Lite만 고를 수 있도록 바뀌고 있습니다. 학교 Workspace 계정은 관리자 설정에 따라 다릅니다.", "extra": "간단한 질문은 빠른 모델로, 코드 작성처럼 어려운 작업만 성능이 높은 모델로 고르면 한도를 오래 쓸 수 있습니다.", "note": "Gemini에게 \"Apps Script 화면에서 어디를 눌러야 하는지도 같이 알려 줘\"라고 덧붙이면 메뉴 안내까지 받을 수 있어요. 캔버스를 켜고 시작하세요."}, "chatgpt": {"warn": "대화 공유 링크는 도구보다 대화 내용이 먼저 보이고, 열어 보는 사람에게 로그인을 요구할 수 있습니다. 전자칠판에서는 HTML 파일로 여는 것이 가장 안정적입니다.", "store": "ChatGPT 캔버스 미리보기에서는 저장이 안 될 수 있습니다. 저장한 HTML 파일을 더블클릭해서 열어 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(메시지 편집)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>보내기</b>를 누릅니다.", "name": "ChatGPT", "intro": "ChatGPT의 \"캔버스\" 기능을 사용합니다. HTML 코드를 캔버스에서 바로 실행해 볼 수 있어요.", "steps": ["<span class=\"kbd\">chatgpt.com</span>에 로그인합니다.", "입력창 왼쪽의 <span class=\"kbd\">+</span> 또는 <span class=\"kbd\">도구</span>를 눌러 <b>캔버스</b>를 선택합니다.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다. 프롬프트 끝에 \"하나의 HTML 파일로\"가 들어 있는지 확인하세요.", "캔버스 오른쪽 위의 <b>미리보기</b>(또는 실행) 버튼을 눌러 도구를 써 봅니다."], "tip": "미리보기 버튼이 보이지 않으면 \"이 코드를 캔버스에서 미리 볼 수 있게 HTML 하나로 다시 만들어 줘\"라고 요청하세요.", "share": ["대화창 오른쪽 위 <b>공유</b>로 대화 링크를 만들 수 있지만, 학생용으로는 파일 저장이 더 안정적입니다.", "캔버스의 코드 전체를 복사해 메모장에 붙이고 <span class=\"kbd\">도구이름.html</span>로 저장합니다.", "저장한 파일을 더블클릭하면 인터넷 창에서 열리고, 전자칠판 PC에 옮겨 쓰면 됩니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "코드를 이어서 고칠 거라면 <span class=\"kbd\">+</span> 메뉴에서 <b>캔버스</b>를 고릅니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["왼쪽 아래 내 이름을 눌러 <b>설정</b>을 엽니다.", "<b>개인 맞춤 설정</b>에서 <b>맞춤형 지침</b>(ChatGPT에 대해 원하는 것) 칸에 위 문장을 붙여넣고 저장합니다."], "model": ["화면 위쪽의 <b>모델 메뉴</b>를 엽니다.", "생각 단계를 고릅니다. <b>Instant</b>는 빠른 답, <b>Medium·High</b>는 더 깊은 생각입니다. 고를 수 있는 단계는 요금제마다 다릅니다.", "무료 계정은 어려운 질문일 때 입력창의 <b>Think</b>를 눌러 씁니다."], "mtip": "유료 요금제에서 Instant를 골라 두면 어려운 질문에도 저절로 깊게 생각하지 않습니다. 같은 오류가 계속 안 풀리면 직접 단계를 올리세요. 생각 단계 한도를 다 쓰면 다른 모델로 바뀌어 이어질 수 있습니다.", "extra": "같은 도구를 여러 대화에 걸쳐 만든다면 <b>프로젝트</b>를 만들어 대화를 모아 두세요. 프로젝트 지침에 도구 설명을 적어 두면 새 대화마다 다시 설명할 필요가 없습니다.", "note": "캔버스를 켜고 시작하세요. Apps Script 코드와 학생 화면 코드는 한 대화 안에서 이어서 요청하면 서로 맞춰서 만들어 줍니다."}, "claude": {"warn": "게시하지 않은 상태의 링크는 나만 볼 수 있습니다. 반드시 공개로 게시한 링크를 학생 기기에서 열어 보세요.", "store": "대화 화면 오른쪽 미리보기에서는 저장이 안 될 수 있습니다. 게시한 링크로 열어서 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(편집)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>저장</b>합니다.", "name": "Claude", "intro": "Claude는 웹 도구를 요청하면 오른쪽 창에 \"아티팩트\"로 바로 실행해 보여 줍니다. 별도 설정이 필요 없어요.", "steps": ["<span class=\"kbd\">claude.ai</span>에 로그인합니다.", "새 대화를 열고 3-2에서 복사한 프롬프트를 붙여넣어 보냅니다.", "잠시 후 오른쪽 창에 도구가 나타나면 직접 눌러 봅니다.", "왼쪽 대화창에서 이어서 수정 요청을 하면 오른쪽 결과가 새 버전으로 바뀝니다."], "tip": "버전이 여러 개 생기면 오른쪽 창 아래의 버전 화살표로 이전 결과와 비교할 수 있습니다.", "share": ["결과 창 오른쪽 위의 <b>공유</b>(또는 게시)를 눌러 링크를 만듭니다.", "링크를 받은 학생은 로그인 없이 도구를 열 수 있습니다(설정에 따라 다를 수 있어요).", "파일로 보관하려면 결과 창의 메뉴에서 <b>다운로드</b>를 고릅니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다.", "오른쪽 창에 도구가 다시 나타나는지 확인합니다."], "set": ["왼쪽 아래 내 이름을 눌러 <b>설정</b>을 엽니다.", "<b>프로필</b>의 개인 선호사항(Claude가 고려할 점) 칸에 위 문장을 붙여넣고 저장합니다."], "model": ["입력창의 전송 버튼 옆 <b>모델 이름</b>을 누릅니다.", "모델을 고릅니다. <b>Haiku</b>는 가볍고 빠름, <b>Sonnet</b>은 균형, <b>Opus</b>는 가장 강력합니다. 다른 모델은 <b>More models</b>에 있습니다.", "같은 메뉴의 <b>Effort</b>에서 Low·Medium·High·Max를 고릅니다. 기본값에는 Default 표시가 있습니다.", "어려운 문제라면 <b>Thinking</b> 스위치를 켭니다. Effort 메뉴가 없는 모델은 <b>Extended</b> 스위치가 같은 역할을 합니다."], "mtip": "대화 중간에 바꿔도 다음 답부터 바로 적용됩니다. 막힌 문제만 높여서 풀고, 풀리면 다시 기본값으로 돌려 두세요.", "extra": "같은 도구를 여러 대화에 걸쳐 만든다면 <b>프로젝트</b>를 만들고, 프로젝트 지침에 도구 설명을 적어 두세요. 입력창의 <b>스타일</b>에서 \"간결하게\"를 고르면 답변도 짧아집니다.", "note": "Apps Script 코드와 학생 화면 코드를 같은 대화에서 차례로 요청하세요. 대화가 길어지면 토큰 절약 특별편 2-4의 이어가기 메모를 쓰세요."}};
+const AIS={"canva": {"warn": "Canva의 일반 \"공유 링크\"는 Canva 로그인을 요구할 수 있습니다. 학생용은 반드시 <b>웹사이트로 게시</b>한 주소를 쓰세요.", "store": "Canva 편집 화면의 미리보기에서는 저장이 안 될 수 있습니다. 게시한 웹사이트 주소로 열어서 확인하세요.", "edit": "Canva AI에서 지난 질문을 고치는 버튼이 보이지 않으면, 결과 창에서 <b>이전 버전</b>으로 되돌린 뒤 고친 문장을 보내세요.", "name": "Canva", "intro": "Canva의 AI 기능 중 \"코드 작성(Canva Code)\"을 사용합니다. 교사 인증된 Canva 교육용 계정이면 무료로 쓸 수 있어요.", "steps": ["<span class=\"kbd\">canva.com</span>에 로그인하고 홈 화면 상단의 <b>Canva AI</b>를 누릅니다.", "입력창 아래 옵션에서 <b>코드 작성</b>(Code)을 선택합니다.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다.", "오른쪽 미리보기에 도구가 나타나면 직접 눌러 봅니다. 코드 보기 탭은 열지 않아도 됩니다."], "tip": "Canva는 결과를 디자인 요소처럼 다룰 수 있어서, 수업 자료 슬라이드 안에 도구를 넣기 좋습니다.", "share": ["미리보기 위의 <b>디자인에서 사용</b>(또는 디자인에 추가)을 눌러 Canva 디자인으로 가져옵니다.", "<b>공유 → 웹사이트로 게시</b>를 고르면 학생이 열 수 있는 링크가 생깁니다.", "수업 슬라이드에 넣었다면 발표 모드에서 바로 실행됩니다."], "newChat": ["Canva 홈 화면 상단의 <b>Canva AI</b>를 엽니다.", "새 대화(새 채팅)를 시작합니다. 이전 대화 목록이 보이면 그 위의 <span class=\"kbd\">+</span>를 누르세요.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["Canva AI에는 다른 AI처럼 답변 방식을 저장하는 설정이 따로 없을 수 있습니다.", "대신 위 문장을 메모장에 저장해 두고, 새 대화의 첫 질문 맨 위에 붙여넣으세요."], "model": ["Canva AI에는 모델이나 생각 깊이를 고르는 메뉴가 없고, Canva가 알아서 고릅니다.", "그래서 Canva에서는 3-1처럼 첫 요청을 정확하게 쓰고 3-2처럼 묶어서 보내는 것이 사용량을 조절하는 가장 좋은 방법입니다."], "mtip": "코드가 길고 어려운 작업(「결과 수집·데이터화」의 데이터베이스 연결 등)은 모델을 고를 수 있는 다른 AI에서 하는 것도 방법입니다.", "extra": "Canva AI는 사용 횟수가 정해져 있습니다. 디자인 생성이나 코드 작성처럼 무거운 요청은 설계를 마친 뒤 한 번에 보내고, 간단한 문구 수정은 디자인 화면에서 직접 고치는 것이 좋습니다.", "note": "Canva에서는 학생 화면 디자인까지만 만들고, Apps Script 코드는 Gemini·ChatGPT·Claude 중 하나에서 요청하는 것을 권합니다. 무료로 쓸 수 있는 AI 하나를 함께 열어 두세요."}, "gemini": {"warn": "학교 Google Workspace 계정은 관리자 설정에 따라 학교 밖 사람이나 학생 계정이 링크를 못 열 수 있습니다. 학생 기기에서 한 번 열어 보세요.", "store": "Gemini 캔버스 미리보기에서는 저장이 안 될 수 있습니다. 공유 링크나 저장한 HTML 파일로 열어서 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(프롬프트 수정)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>업데이트</b>합니다.", "name": "Gemini", "intro": "Gemini의 \"캔버스(Canvas)\" 도구를 사용합니다. 일반 대화창 대신 캔버스를 켜야 미리보기가 보입니다.", "steps": ["<span class=\"kbd\">gemini.google.com</span>에 구글 계정으로 로그인합니다.", "입력창 아래의 <b>캔버스</b>(Canvas) 버튼을 눌러 켭니다. 보이지 않으면 <span class=\"kbd\">도구</span> 메뉴 안에 있어요.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다.", "오른쪽 창 상단의 <b>미리보기</b> 탭에서 도구를 직접 눌러 봅니다."], "tip": "학교 Google Workspace 계정은 관리자가 Gemini를 막아 둔 경우가 있습니다. 안 되면 개인 계정으로 실습하세요.", "share": ["캔버스 오른쪽 위의 <b>공유</b> 버튼을 눌러 링크를 만듭니다.", "링크를 클래스룸 공지나 QR코드로 학생에게 전달합니다.", "파일로 보관하려면 코드 탭에서 <b>복사</b> 후 메모장에 붙여 <span class=\"kbd\">도구이름.html</span>로 저장합니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "코드를 이어서 고칠 거라면 입력창 아래 <b>캔버스</b>를 다시 켭니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["왼쪽 아래 <b>설정</b>을 엽니다.", "<b>저장된 정보</b>(또는 개인 맞춤 설정) 메뉴에 위 문장을 추가합니다.", "자주 만드는 도구가 있다면 <b>Gem</b>을 새로 만들어 지침 칸에 붙여넣어도 됩니다."], "model": ["입력창 오른쪽 아래의 <b>모델 메뉴</b>를 엽니다.", "<b>Flash-Lite</b>는 가볍고 빠름, <b>Flash</b>는 균형, <b>Pro</b>는 가장 강력한 모델입니다.", "생각 깊이(낮음·보통·높음) 설정이 차례로 추가되고 있습니다. 보이지 않으면 <b>Extended thinking</b> 같은 생각 옵션을 찾아보세요."], "mtip": "2026년 10월부터 요금제가 없는 개인 구글 계정은 Flash-Lite만 고를 수 있도록 바뀌고 있습니다. 학교 Workspace 계정은 관리자 설정에 따라 다릅니다.", "extra": "간단한 질문은 빠른 모델로, 코드 작성처럼 어려운 작업만 성능이 높은 모델로 고르면 한도를 오래 쓸 수 있습니다.", "note": "Gemini에게 \"Apps Script 화면에서 어디를 눌러야 하는지도 같이 알려 줘\"라고 덧붙이면 메뉴 안내까지 받을 수 있어요. 캔버스를 켜고 시작하세요."}, "chatgpt": {"warn": "대화 공유 링크는 도구보다 대화 내용이 먼저 보이고, 열어 보는 사람에게 로그인을 요구할 수 있습니다. 전자칠판에서는 HTML 파일로 여는 것이 가장 안정적입니다.", "store": "ChatGPT 캔버스 미리보기에서는 저장이 안 될 수 있습니다. 저장한 HTML 파일을 더블클릭해서 열어 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(메시지 편집)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>보내기</b>를 누릅니다.", "name": "ChatGPT", "intro": "ChatGPT의 \"캔버스\" 기능을 사용합니다. HTML 코드를 캔버스에서 바로 실행해 볼 수 있어요.", "steps": ["<span class=\"kbd\">chatgpt.com</span>에 로그인합니다.", "입력창 왼쪽의 <span class=\"kbd\">+</span> 또는 <span class=\"kbd\">도구</span>를 눌러 <b>캔버스</b>를 선택합니다.", "3-2에서 복사한 프롬프트를 붙여넣고 보냅니다. 프롬프트 끝에 \"하나의 HTML 파일로\"가 들어 있는지 확인하세요.", "캔버스 오른쪽 위의 <b>미리보기</b>(또는 실행) 버튼을 눌러 도구를 써 봅니다."], "tip": "미리보기 버튼이 보이지 않으면 \"이 코드를 캔버스에서 미리 볼 수 있게 HTML 하나로 다시 만들어 줘\"라고 요청하세요.", "share": ["대화창 오른쪽 위 <b>공유</b>로 대화 링크를 만들 수 있지만, 학생용으로는 파일 저장이 더 안정적입니다.", "캔버스의 코드 전체를 복사해 메모장에 붙이고 <span class=\"kbd\">도구이름.html</span>로 저장합니다.", "저장한 파일을 더블클릭하면 인터넷 창에서 열리고, 전자칠판 PC에 옮겨 쓰면 됩니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "코드를 이어서 고칠 거라면 <span class=\"kbd\">+</span> 메뉴에서 <b>캔버스</b>를 고릅니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다."], "set": ["왼쪽 아래 내 이름을 눌러 <b>설정</b>을 엽니다.", "<b>개인 맞춤 설정</b>에서 <b>맞춤형 지침</b>(ChatGPT에 대해 원하는 것) 칸에 위 문장을 붙여넣고 저장합니다."], "model": ["화면 위쪽의 <b>모델 메뉴</b>를 엽니다.", "생각 단계를 고릅니다. <b>Instant</b>는 빠른 답, <b>Medium·High</b>는 더 깊은 생각입니다. 고를 수 있는 단계는 요금제마다 다릅니다.", "무료 계정은 어려운 질문일 때 입력창의 <b>Think</b>를 눌러 씁니다."], "mtip": "유료 요금제에서 Instant를 골라 두면 어려운 질문에도 저절로 깊게 생각하지 않습니다. 같은 오류가 계속 안 풀리면 직접 단계를 올리세요. 생각 단계 한도를 다 쓰면 다른 모델로 바뀌어 이어질 수 있습니다.", "extra": "같은 도구를 여러 대화에 걸쳐 만든다면 <b>프로젝트</b>를 만들어 대화를 모아 두세요. 프로젝트 지침에 도구 설명을 적어 두면 새 대화마다 다시 설명할 필요가 없습니다.", "note": "캔버스를 켜고 시작하세요. Apps Script 코드와 학생 화면 코드는 한 대화 안에서 이어서 요청하면 서로 맞춰서 만들어 줍니다."}, "claude": {"warn": "게시하지 않은 상태의 링크는 나만 볼 수 있습니다. 반드시 공개로 게시한 링크를 학생 기기에서 열어 보세요.", "store": "대화 화면 오른쪽 미리보기에서는 저장이 안 될 수 있습니다. 게시한 링크로 열어서 확인하세요.", "edit": "이상해진 질문 위에 마우스를 올리고 <b>연필(편집)</b> 버튼을 누른 뒤, 고친 문장으로 바꿔 <b>저장</b>합니다.", "name": "Claude", "intro": "Claude는 웹 도구를 요청하면 오른쪽 창에 \"아티팩트\"로 바로 실행해 보여 줍니다. 별도 설정이 필요 없어요.", "steps": ["<span class=\"kbd\">claude.ai</span>에 로그인합니다.", "새 대화를 열고 3-2에서 복사한 프롬프트를 붙여넣어 보냅니다.", "잠시 후 오른쪽 창에 도구가 나타나면 직접 눌러 봅니다.", "왼쪽 대화창에서 이어서 수정 요청을 하면 오른쪽 결과가 새 버전으로 바뀝니다."], "tip": "버전이 여러 개 생기면 오른쪽 창 아래의 버전 화살표로 이전 결과와 비교할 수 있습니다.", "share": ["결과 창 오른쪽 위의 <b>공유</b>(또는 게시)를 눌러 링크를 만듭니다.", "링크를 받은 학생은 로그인 없이 도구를 열 수 있습니다(설정에 따라 다를 수 있어요).", "파일로 보관하려면 결과 창의 메뉴에서 <b>다운로드</b>를 고릅니다."], "newChat": ["왼쪽 위의 <b>새 채팅</b>을 누릅니다.", "아래 \"새 대화 첫 질문\"과 함께 메모와 코드를 붙여넣어 보냅니다.", "오른쪽 창에 도구가 다시 나타나는지 확인합니다."], "set": ["왼쪽 아래 내 이름을 눌러 <b>설정</b>을 엽니다.", "<b>프로필</b>의 개인 선호사항(Claude가 고려할 점) 칸에 위 문장을 붙여넣고 저장합니다."], "model": ["입력창의 전송 버튼 옆 <b>모델 이름</b>을 누릅니다.", "모델을 고릅니다. <b>Haiku</b>는 가볍고 빠름, <b>Sonnet</b>은 균형, <b>Opus</b>는 가장 강력합니다. 다른 모델은 <b>More models</b>에 있습니다.", "같은 메뉴의 <b>Effort</b>에서 Low·Medium·High·Max를 고릅니다. 기본값에는 Default 표시가 있습니다.", "어려운 문제라면 <b>Thinking</b> 스위치를 켭니다. Effort 메뉴가 없는 모델은 <b>Extended</b> 스위치가 같은 역할을 합니다."], "mtip": "대화 중간에 바꿔도 다음 답부터 바로 적용됩니다. 막힌 문제만 높여서 풀고, 풀리면 다시 기본값으로 돌려 두세요.", "extra": "같은 도구를 여러 대화에 걸쳐 만든다면 <b>프로젝트</b>를 만들고, 프로젝트 지침에 도구 설명을 적어 두세요. 입력창의 <b>스타일</b>에서 \"간결하게\"를 고르면 답변도 짧아집니다.", "note": "Apps Script 코드와 학생 화면 코드를 같은 대화에서 차례로 요청하세요. 대화가 길어지면 「토큰 절약」 2-4의 이어가기 메모를 쓰세요."}};
 
 /* 페이지 */
 const PAGES=[...document.querySelectorAll('.page')].map(s=>s.dataset.page);
@@ -952,7 +973,7 @@ const IDEAS=[
  {k:'sort',t:'개념 분류 게임',d:'카드를 알맞은 칸으로 나누기',name:'개념 분류하기',who:'개념을 배운 직후, 학생이 태블릿으로 카드를 분류하기',feat:'카드 8장을 두 칸(예: 모양이 변함 / 운동 상태가 변함) 중 하나로 눌러서 보내기\n다 나누면 "채점" 버튼으로 맞은 카드는 초록, 틀린 카드는 빨강 표시\n틀린 카드를 누르면 왜 그런지 한 줄 설명\n카드와 칸 이름은 코드 맨 위에 모아 쉽게 바꿀 수 있게',look:'카드 느낌, 색으로 칸 구분, 글자는 크게'},
  {k:'vote',t:'학급 의견 투표',d:'선택지를 누르면 막대그래프로 집계',name:'우리 반 의견 모으기',who:'학급회의·수업 토의에서 학생이 차례로 투표',feat:'질문 하나와 선택지 3~4개를 입력할 수 있음\n학생이 차례로 나와 버튼을 누르면 표가 쌓임\n결과를 막대그래프로 보여 주는 "결과 보기" 버튼\n"다시 하기"로 초기화',look:'색깔별 선택지, 막대그래프는 크게'},
  {k:'word',t:'영단어 카드',d:'뒤집어 보는 단어 암기 카드',name:'영단어 플래시카드',who:'영어 수업 단원 단어를 학생이 스스로 복습',feat:'카드를 누르면 앞(영어)과 뒤(뜻)가 뒤집힘\n이전, 다음 버튼과 "섞기" 버튼\n"외웠어요" 표시한 카드는 따로 모아 개수 표시\n예시 단어는 해당 학년 영어 교과서 수준으로 10개\n단어 목록은 코드 맨 위에 모아 쉽게 바꿀 수 있게',look:'카드 느낌, 글자는 또렷하고 크게'},
- {k:'exit',t:'출구 티켓',d:'수업 끝에 이해도와 한 줄 소감',name:'오늘의 출구 티켓',who:'수업 마지막 3분, 학생이 각자 기기로 작성',feat:'오늘 배운 것 한 줄 쓰기 칸\n이해도를 1~4단계 큰 버튼으로 고르기\n아직 궁금한 점 쓰기 칸(선택)\n제출하면 "고마워요!" 화면과 함께 입력 칸 잠그기\n이름은 받지 않기(결과 모으기는 7편에서 연결)',look:'차분한 색, 입력 칸은 크게'},
+ {k:'exit',t:'출구 티켓',d:'수업 끝에 이해도와 한 줄 소감',name:'오늘의 출구 티켓',who:'수업 마지막 3분, 학생이 각자 기기로 작성',feat:'오늘 배운 것 한 줄 쓰기 칸\n이해도를 1~4단계 큰 버튼으로 고르기\n아직 궁금한 점 쓰기 칸(선택)\n제출하면 "고마워요!" 화면과 함께 입력 칸 잠그기\n이름은 받지 않기(결과 모으기는 「결과 수집·데이터화」에서 연결)',look:'차분한 색, 입력 칸은 크게'},
  {k:'timer',t:'모둠 활동 타이머',d:'남은 시간이 멀리서도 보이는 큰 타이머',name:'모둠 활동 타이머',who:'모둠 토의·실험 활동 시간 관리(전자칠판)',feat:'3분, 5분, 10분 빠른 선택 버튼과 직접 입력\n시작, 일시정지, 초기화 버튼\n남은 시간이 1분 이하면 배경색이 주황색으로 바뀜\n시간이 끝나면 화면이 깜빡이며 "정리하세요!" 표시',look:'차분한 색, 숫자는 화면을 가득 채울 만큼 크게'}
 ];
 const GRADES=['중학교 1학년','중학교 2학년','중학교 3학년'];
@@ -1087,11 +1108,11 @@ const MT=['가벼운 모델','균형 모델','최고 모델'],ET=['낮음','보�
 const MJOBS=[
  {t:'맞춤법·문장 다듬기',m:1,e:1,w:'정답이 분명하고 짧은 일입니다. 가벼운 모델로도 충분하고, 답도 빨리 옵니다.'},
  {t:'가정통신문 초안',m:2,e:1,w:'일반적인 글쓰기는 기본값이면 됩니다. 생각을 깊게 해도 글이 크게 나아지지 않습니다.'},
- {t:'수업 도구 처음 만들기',m:2,e:2,w:'3편처럼 화면 하나짜리 도구는 균형 모델·보통 생각이면 잘 만듭니다. 설계표로 첫 질문을 정확하게 쓰는 게 더 중요합니다.'},
+ {t:'수업 도구 처음 만들기',m:2,e:2,w:'「학생 참여형 웹앱」처럼 화면 하나짜리 도구는 균형 모델·보통 생각이면 잘 만듭니다. 설계표로 첫 질문을 정확하게 쓰는 게 더 중요합니다.'},
  {t:'글자·색 같은 작은 수정',m:1,e:1,w:'겉모습 수정은 어려운 판단이 필요 없습니다. 도구를 만든 뒤에는 모델을 한 단계 내려서 고쳐도 됩니다.'},
  {t:'같은 오류가 3번 넘게 안 고쳐질 때',m:3,e:3,w:'이때가 올릴 때입니다. 최고 모델·높은 생각으로 원인을 찾게 하고, 해결되면 다시 기본값으로 내리세요.'},
  {t:'긴 공문·PDF 여러 개 분석',m:2,e:3,w:'자료를 꼼꼼히 비교해야 하니 생각 깊이를 올립니다. 모델은 균형으로도 충분한 경우가 많습니다.'},
- {t:'시트 연결·암호화 (7편)',m:3,e:3,w:'코드가 길고 보안 조건이 많아 실수가 비쌉니다. 처음부터 최고 모델·높은 생각을 권합니다.'}
+ {t:'시트 연결·암호화 (「결과 수집·데이터화」)',m:3,e:3,w:'코드가 길고 보안 조건이 많아 실수가 비쌉니다. 처음부터 최고 모델·높은 생각을 권합니다.'}
 ];
 let mjob=store.get('mjob',2);
 $('#mPicker').innerHTML=MJOBS.map((j,i)=>'<button class="pk" type="button" data-mj="'+i+'" aria-pressed="false">'+esc(j.t)+'</button>').join('');
@@ -1641,7 +1662,7 @@ const SITES=[
  {c:'color',n:'눈누',u:'https://noonnu.cc/',p:'무료 글꼴 모음 · 조건 개별 확인',d:'상업적으로 쓸 수 있는 한국어 글꼴을 모아 둔 사이트. 글꼴마다 사용 조건이 다릅니다.',h:'글꼴 이름과 함께 "이 글꼴 파일을 첨부했으니 써 줘"'},
  {c:'asset',n:'Lucide',u:'https://lucide.dev/',p:'무료 오픈소스',d:'깔끔한 선 아이콘 모음. 이름을 알면 AI가 바로 가져다 씁니다.',h:'"아이콘은 Lucide의 timer, check-circle을 써 줘"'},
  {c:'asset',n:'공유마당',u:'https://gongu.copyright.or.kr/',p:'무료 · 이용 조건 확인',d:'한국저작권위원회가 운영하는 저작권 처리된 저작물 모음. 이미지, 음악, 글꼴 등을 조건에 맞게 쓸 수 있습니다.',h:'내려받은 그림을 첨부하고 출처 표시 조건을 프롬프트에 함께 적기'},
- {c:'learn',n:'Claude 프롬프트 가이드',u:'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview',p:'무료',d:'Anthropic이 정리한 프롬프트 작성 원칙. 명확하게 쓰기, 예시 주기, 역할 주기 등.',h:'1편 2-3의 원칙을 더 깊이 공부할 때'},
+ {c:'learn',n:'Claude 프롬프트 가이드',u:'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview',p:'무료',d:'Anthropic이 정리한 프롬프트 작성 원칙. 명확하게 쓰기, 예시 주기, 역할 주기 등.',h:'「AI 기본 이론」 2-3의 원칙을 더 깊이 공부할 때'},
  {c:'learn',n:'Gemini 프롬프트 설계 전략',u:'https://ai.google.dev/gemini-api/docs/prompting-strategies',p:'무료',d:'Google이 정리한 프롬프트 설계 방법. 분명한 지시, 예시, 맥락 주기, 작업 나누기.',h:'예시를 몇 개 보여 주는 방법을 익힐 때'},
  {c:'learn',n:'OpenAI 프롬프트 가이드',u:'https://developers.openai.com/api/docs/guides/prompt-engineering',p:'무료',d:'OpenAI가 정리한 프롬프트 작성 가이드.',h:'다른 AI에서도 통하는 공통 원칙을 비교해 볼 때'}
 ];
@@ -1846,7 +1867,7 @@ vuR();
 
 
 if(document.querySelector('#rvRes')){
-const RVD=[['none','받지 않음 (익명)'],['local','이름·번호를 받지만 그 기기에만 저장'],['send','구글 시트·서버로 보냄 (7편 방식)']];
+const RVD=[['none','받지 않음 (익명)'],['local','이름·번호를 받지만 그 기기에만 저장'],['send','구글 시트·서버로 보냄 (「결과 수집·데이터화」 방식)']];
 const RVU=[['class','정규 수업에서 학생이 직접 사용'],['prep','수업 준비용으로 나만 사용'],['org','업체·기관이 만든 서비스']];
 let rd=store.get('rvD','none'),ru=store.get('rvU','class');
 $('#rvData').innerHTML=RVD.map(x=>'<button type="button" class="pk" data-rd="'+x[0]+'">'+esc(x[1])+'</button>').join('');
@@ -1868,6 +1889,54 @@ function rvR(){
 document.querySelectorAll('[data-rd]').forEach(b=>b.addEventListener('click',()=>{rd=b.dataset.rd;store.set('rvD',rd);rvR()}));
 document.querySelectorAll('[data-ru]').forEach(b=>b.addEventListener('click',()=>{ru=b.dataset.ru;store.set('rvU',ru);rvR()}));
 rvR();
+}
+
+if(document.querySelector('#apSteps')){
+const AP=[
+ {t:'① 주문서 쓰기',on:['apF1'],d:'학생이 웹앱에 답을 입력하고 "확인"을 누르면, 웹앱이 AI에게 보낼 주문서(요청)를 정해진 모양으로 씁니다. 무엇을 물을지는 선생님이 미리 코드에 정해 둡니다.',lab:'웹앱이 쓰는 주문서 (요청)',m:'{\n  "model": "모델 이름",\n  "messages": [\n    {"role": "user", "content": "중학생 답: 힘의 단위는 kg이다. 짧게 피드백해 줘."}\n  ]\n}'},
+ {t:'② 창구에서 열쇠 확인',on:['apF1','apF2'],d:'주문서는 API 주소로 보내집니다. 창구는 함께 온 API 키를 보고 누구의 주문인지, 요금을 누구에게 매길지 확인합니다. 키가 없거나 틀리면 여기서 거절됩니다.',lab:'주문서와 함께 가는 열쇠',m:'주소:  https://api.(AI 회사).com/v1/messages\n열쇠:  x-api-key: sk-••••••••••••••••  ← 비밀번호처럼 숨겨야 함'},
+ {t:'③ 주방에서 답 만들기',on:['apF2','apF3'],d:'AI 서버는 1-1에서 본 방식 그대로 다음 말을 이어 붙여 답을 만듭니다. 채팅 화면과 같은 AI이고, 창구만 다릅니다. 읽고 쓴 토큰(1-2)만큼 요금이 계산됩니다.',lab:'주방에서 일어나는 일',m:'입력 토큰 32개 읽음 → 출력 토큰 41개 생성\n요금 = 입력 토큰 × 단가 + 출력 토큰 × 단가'},
+ {t:'④ 답 돌려받기',on:['apF3','apF1'],d:'AI 서버가 답을 정해진 모양(보통 JSON)으로 돌려주면, 웹앱이 그 안에서 글자만 꺼내 학생 화면에 보여 줍니다. 학생은 이 과정을 보지 못하고 피드백만 봅니다.',lab:'돌아온 답 (응답)',m:'{\n  "content": [\n    {"type": "text", "text": "kg은 질량의 단위예요. 힘의 단위는 N(뉴턴)입니다. 교과서 112쪽을 다시 볼까요?"}\n  ],\n  "usage": {"input_tokens": 32, "output_tokens": 41}\n}'}
+];
+let ap=0;
+$('#apSteps').innerHTML=AP.map((s,i)=>'<button type="button" class="pk" data-ap="'+i+'">'+esc(s.t)+'</button>').join('');
+function apR(){const s=AP[ap];
+  document.querySelectorAll('[data-ap]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.ap===ap?'true':'false'));
+  ['apF1','apF2','apF3'].forEach(id=>$('#'+id).classList.toggle('on',s.on.includes(id)));
+  setT('apDetail',s.d);setT('apMsgLab',s.lab);setT('apMsg',s.m);}
+document.querySelectorAll('[data-ap]').forEach(b=>b.addEventListener('click',()=>{ap=+b.dataset.ap;apR()}));
+apR();
+const AQ=[
+ {t:'ChatGPT 화면에서 문항 만들기',k:'no',a:'필요 없어요',w:'사람이 채팅 화면에서 직접 쓰는 것은 "사람 창구"입니다. 로그인만 하면 됩니다.'},
+ {t:'「학생 참여형 웹앱」 OX 퀴즈 웹앱',k:'no',a:'필요 없어요',w:'정답과 해설이 웹앱 코드 안에 들어 있어서, 웹앱이 밖의 누구에게도 묻지 않습니다.'},
+ {t:'학생 답에 AI가 즉석 피드백',k:'yes',a:'AI API 키가 필요해요',w:'웹앱이 실행 중에 AI에게 물어야 하므로 API가 필요합니다. 키는 HTML이 아니라 Apps Script 같은 서버 쪽에 숨기고, 학생 답이 외부 AI로 전송되니 개인정보와 학운위 심의(「학생 참여형 웹앱」 4-5)도 확인하세요.'},
+ {t:'오늘 급식 메뉴 보여 주기',k:'yes',a:'공공 데이터 API를 써요',w:'나이스 교육정보 개방 포털의 급식 식단 API처럼, 기관이 공개한 API로 정보를 불러옵니다. 인증키는 회원 가입 후 무료로 발급받습니다.'},
+ {t:'「결과 수집·데이터화」 구글 시트에 답 모으기',k:'mine',a:'내가 만든 API예요',w:'Apps Script로 배포한 웹 앱 주소가 학생 답을 받는 창구, 즉 내가 만든 API입니다. 따로 키는 없지만 그 주소 자체가 열쇠 역할을 하니 함부로 공개하지 않습니다.'}
+];
+let aq=-1;
+$('#apQuiz').innerHTML=AQ.map((q,i)=>'<button type="button" class="pk" data-aq="'+i+'">'+esc(q.t)+'</button>').join('');
+function aqR(){
+  document.querySelectorAll('[data-aq]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.aq===aq?'true':'false'));
+  if(aq<0){$('#apQRes').innerHTML='<p class="small">상황을 하나 골라 보세요. 먼저 답을 생각해 보고 누르면 더 좋아요.</p>';return}
+  const q=AQ[aq];$('#apQRes').innerHTML='<span class="lab">'+esc(q.t)+'</span><p><b>'+esc(q.a)+'</b></p><p>'+esc(q.w)+'</p>';
+}
+document.querySelectorAll('[data-aq]').forEach(b=>b.addEventListener('click',()=>{aq=+b.dataset.aq;aqR()}));
+aqR();
+}
+
+if(document.querySelector('#clItems')){
+const CL=[['장식용 캐릭터·배경 그림',8],['슬라이드마다 다른 전환 효과',7],['내레이션과 똑같은 자막',9],['그림은 앞 장, 설명은 다음 장',8],['버튼 열 개와 긴 사용법',10],['배경 음악과 효과음',6]];
+const sel=new Set(store.get('cl',[0]));
+$('#clItems').innerHTML=CL.map((c,i)=>'<label><input type="checkbox" data-cl="'+i+'"'+(sel.has(i)?' checked':'')+'><span>'+esc(c[0])+'</span></label>').join('');
+function clR(){
+  const ex=CL.reduce((a,c,i)=>a+(sel.has(i)?c[1]:0),0);const ge=Math.max(0,60-ex);
+  $('#clEx').style.width=ex+'%';$('#clGe').style.width=ge+'%';
+  $('#clEx').innerHTML=ex>=10?'<span>배움과 무관</span>':'';
+  $('#clGe').classList.toggle('thin',ge<14);
+  setT('clMsg',ex===0?'외재적 부하가 없어서 그릇의 남은 자리를 모두 배움에 쓸 수 있습니다.':ex>=40?'그릇이 거의 찼습니다. 학생은 내용을 이해할 여유 없이 화면을 따라가기에 바쁩니다.':'켠 것들이 배움에 쓸 자리를 그만큼 차지합니다. 꼭 필요한 것만 남기세요.');
+}
+document.querySelectorAll('[data-cl]').forEach(c=>c.addEventListener('change',()=>{c.checked?sel.add(+c.dataset.cl):sel.delete(+c.dataset.cl);store.set('cl',[...sel]);clR()}));
+clR();
 }
 
 /* 체크 · 진행 */
