@@ -667,7 +667,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
 @media (max-width:560px){.rk-list li{grid-template-columns:20px minmax(0,1fr) 3.8em}.rk-bar{grid-column:2/-1;grid-row:2}}
 [hidden]{display:none!important}
 </style>
-<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}.series a,.series .cur{grid-template-columns:minmax(0,1fr)}.series a.series-h{display:block;text-decoration:none;color:var(--muted)}.series a.series-h:hover{color:var(--accent)}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<style>.to-home{display:none}@media (max-width:860px){.brand{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand h1{min-width:0}.to-home{display:inline-flex;align-items:center;gap:4px;flex:none;font-size:13px;font-weight:500;text-decoration:none;color:var(--accent);border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:5px 12px;min-height:32px}}html{color-scheme:light dark}body{margin:0}img{max-width:100%}.series a,.series .cur{grid-template-columns:minmax(0,1fr)}.series a.series-h{display:block;text-decoration:none;color:var(--muted)}.series a.series-h:hover{color:var(--accent)}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
 <body>
 
@@ -677,6 +677,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
   <div class="brand">
     <span class="eyebrow">중학교 교원 자율연수 · 실습</span>
     <h1>수업 PPT 만들기</h1>
+    <a class="to-home" href="index.html">← 전체 목차</a>
     <p class="sub">지침서·글꼴·에셋을 담은 작업 폴더로, 매번 같은 품질의 PPTX 수업 슬라이드를 만듭니다.</p>
   </div>
   <nav aria-label="연수 목차">
@@ -697,6 +698,7 @@ textarea{resize:vertical;min-height:64px;line-height:1.6}
     <a href="ai-rankings.html"><span>부문별 AI 순위</span></a>
     <a href="special-agent-ai.html"><span>에이전트 AI</span></a>
     <a href="special-token-saving.html"><span>토큰 절약</span></a>
+    <a href="refactoring.html"><span>리팩토링</span></a>
     <a href="special-prompt-sites.html"><span>프롬프트 도우미 사이트</span></a>
     <span class="series-g">실습</span>
     <span class="cur" aria-current="page"><span>수업 PPT 만들기</span></span>
@@ -1955,6 +1957,17 @@ document.querySelectorAll('.rk-box').forEach(box=>{
   box.querySelectorAll('[data-rkc]').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.rkc;store.set(sk,cur);R()}));
   R();
 });
+}
+
+if(document.querySelector('#rfSig')){
+const SIG=['수정 요청이 5번을 넘었다','이미 고친 문제가 다시 생긴다','하나를 고치면 다른 곳이 망가진다','AI의 코드 답이 길어서 중간에 잘린다','문제를 바꾸려는데 어디를 고쳐야 할지 AI도 헷갈려 한다','곧 기능을 더하거나 크게 바꿀 계획이다'];
+const on=new Set(store.get('rfSig',[]));
+$('#rfSig').innerHTML=SIG.map((t,i)=>'<label><input type="checkbox" data-sg="'+i+'"'+(on.has(i)?' checked':'')+'><span>'+esc(t)+'</span></label>').join('');
+function sgR(){const n=on.size;
+  const v=n===0?['아직은 괜찮아요','잘 돌아가는 도구는 그대로 쓰세요. 신호가 보이기 시작하면 다시 확인하세요.']:n===1?['조금 지켜보세요','신호가 하나라면 한 번에 하나씩 고치기로 충분할 수 있습니다. 같은 일이 반복되면 정리를 맡기세요.']:['리팩토링할 때예요','신호가 '+n+'개입니다. 더 고치기 전에 2-2의 다섯 단계로 한 번 정리하세요.'];
+  $('#rfRes').innerHTML='<span class="lab">판단</span><p><b>'+esc(v[0])+'</b></p><p>'+esc(v[1])+'</p>';}
+document.querySelectorAll('[data-sg]').forEach(c=>c.addEventListener('change',()=>{c.checked?on.add(+c.dataset.sg):on.delete(+c.dataset.sg);store.set('rfSig',[...on]);sgR()}));
+sgR();
 }
 
 /* 체크 · 진행 */
